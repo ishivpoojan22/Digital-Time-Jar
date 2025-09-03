@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 export const register = async (data) =>
   fetch(`${BASE_URL}/auth/register`, {
