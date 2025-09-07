@@ -325,7 +325,7 @@
     background-color: #ffffff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease-in-out;
-    position: relative;
+/*     position: relative; */
   }
   
   .capsule-card:hover {
@@ -447,7 +447,7 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     padding: 1.5rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
+/*     position: relative; */
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -656,7 +656,7 @@
     background: white;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
+/*     position: relative; */
   }
   
   .capsule-card:hover {
@@ -1119,7 +1119,7 @@
   padding: 1.5rem;
   box-shadow: 0 6px 16px rgba(0,0,0,0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
+/*   position: relative; */
 }
 
 .capsule-card:hover {
