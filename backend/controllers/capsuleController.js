@@ -1,9 +1,8 @@
-<<<<<<< HEAD
-const db = require("../models/Capsule");
-const { encrypt, decrypt } = require("../utils/crypto");
-const axios = require("axios");
-const nodemailer = require("nodemailer");
-=======
+// const db = require("../models/Capsule");
+// const { encrypt, decrypt } = require("../utils/crypto");
+// const axios = require("axios");
+// const nodemailer = require("nodemailer");
+
 // const db = require('../models/Capsule');
 // const { encrypt, decrypt } = require('../utils/crypto');
 // const axios = require('axios');
@@ -298,7 +297,6 @@ const db = require('../models/Capsule');
 const { encrypt, decrypt } = require('../utils/crypto');
 const axios = require('axios');
 const nodemailer = require('nodemailer');
->>>>>>> 91a46eab1fd40a13a609998002b36de893f0624b
 const crypto = require("../utils/crypto");
 const { getPRCount } = require("../services/githubService");
 const sendEmail = require("../utils/sendEmail");
