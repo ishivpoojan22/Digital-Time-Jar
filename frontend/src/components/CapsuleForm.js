@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import API from "../api";
 import CapsuleTypeSelector from "./CapsuleTypeSelector";
-import GitHubCapsuleButton from './GitHubCapsuleButton';
+import GitHubCapsuleButton from "./GitHubCapsuleButton";
 import "./CapsuleForm.css";
 
 export default function CapsuleForm({ onCreated }) {
@@ -28,6 +28,7 @@ export default function CapsuleForm({ onCreated }) {
         triggerType,
         triggerValue,
         theme,
+        type, // Send user-friendly capsule type
       });
       alert("🎉 Capsule Created!");
       onCreated();
@@ -47,7 +48,7 @@ export default function CapsuleForm({ onCreated }) {
 
       <CapsuleTypeSelector type={type} setType={setType} />
 
-      {type === 'github' && (
+      {type === "github" && (
         <div className="form-group">
           <GitHubCapsuleButton capsuleType={type} />
         </div>
@@ -103,7 +104,7 @@ export default function CapsuleForm({ onCreated }) {
           />
         </div>
       )}
-      {(type !== "github" && type !== "location") && (
+      {type !== "github" && type !== "location" && (
         <div className="form-group">
           <label htmlFor="triggerValue">⏳ Open Date</label>
           <input

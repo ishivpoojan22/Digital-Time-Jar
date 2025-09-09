@@ -16,6 +16,17 @@ const sendEmail = async ({ to, subject, text }) => {
     text,
   };
 
+  // Debugging: log mail options so we can see exactly what is sent
+  try {
+    console.log("sendEmail ->", {
+      to: mailOptions.to,
+      subject: mailOptions.subject,
+      textPreview: (mailOptions.text || "").slice(0, 500),
+    });
+  } catch (e) {
+    // ignore logging errors
+  }
+
   return transporter.sendMail(mailOptions);
 };
 
