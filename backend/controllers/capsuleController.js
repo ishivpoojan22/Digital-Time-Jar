@@ -293,10 +293,10 @@
 
 
 
-const db = require('../models/Capsule');
-const { encrypt, decrypt } = require('../utils/crypto');
-const axios = require('axios');
-const nodemailer = require('nodemailer');
+const db = require("../models/Capsule");
+const { encrypt, decrypt } = require("../utils/crypto");
+const axios = require("axios");
+const nodemailer = require("nodemailer");
 const crypto = require("../utils/crypto");
 const { getPRCount } = require("../services/githubService");
 const sendEmail = require("../utils/sendEmail");
@@ -525,50 +525,9 @@ exports.simulateTriggers = async (req, res) => {
       for (const capsule of capsules) {
         let shouldDeliver = false;
 
-<<<<<<< HEAD
         if (capsule.triggerType === "date") {
           const triggerDate = new Date(capsule.triggerValue);
           if (now >= triggerDate) shouldDeliver = true;
-=======
-      if (capsule.triggerType === "date") {
-        const triggerDate = new Date(capsule.triggerValue);
-        if (now >= triggerDate) shouldDeliver = true;
-      }
-
-      if (capsule.triggerType === "location" && capsule.triggerValue.toLowerCase() === "paris") {
-        shouldDeliver = true; // Simulated presence in Paris
-      }
-
-      if (capsule.triggerType === "milestone") {
-        // Fetch user's GitHub token
-        await new Promise((resolve) => {
-          db.get('SELECT githubToken FROM users WHERE id = ?', [capsule.userId], async (userErr, user) => {
-            if (userErr || !user || !user.githubToken) {
-              console.warn(`No GitHub token for user ${capsule.userId}, skipping capsule ${capsule.id}`);
-              resolve();
-              return;
-            }
-            try {
-              const currentPRs = await getPRCount(user.githubToken);
-              const target = parseInt(capsule.triggerValue);
-              if (currentPRs >= target) shouldDeliver = true;
-            } catch (apiErr) {
-              console.error(`GitHub API error for capsule ${capsule.id}:`, apiErr.message);
-            }
-            resolve();
-          });
-        });
-      }
-
-      if (shouldDeliver) {
-        db.run(
-          'UPDATE capsules SET isDelivered = 1, openedAt = datetime(\'now\') WHERE id = ?',
-          [capsule.id]
-        );
-        deliveredCount++;
-        if (capsule.triggerType === "milestone") {
-          sendCongratulatoryEmail(capsule.userEmail);
->>>>>>> 91a46eab1fd40a13a609998002b36de893f0624b
         }
 
         if (
@@ -673,7 +632,6 @@ exports.simulateTriggers = async (req, res) => {
 // Simulate GitHub PR milestone (for milestone-based capsules)
 exports.simulatePRMilestone = async (req, res) => {
   const { userId, targetPRCount } = req.body;
-<<<<<<< HEAD
   db.all(
     `SELECT * FROM capsules WHERE userId = ? AND triggerType = 'milestone'`,
     [userId],
@@ -763,28 +721,6 @@ exports.simulatePRMilestone = async (req, res) => {
                 );
               }
               resolve();
-=======
-  db.all(`SELECT * FROM capsules WHERE userId = ? AND triggerType = 'milestone'`, [userId], async (err, capsules) => {
-    if (err) return res.status(500).json({ error: err.message });
-    let deliveredCount = 0;
-    for (const capsule of capsules) {
-      await new Promise((resolve) => {
-        db.get('SELECT githubToken FROM users WHERE id = ?', [userId], async (userErr, user) => {
-          if (userErr || !user || !user.githubToken) {
-            console.warn(`No GitHub token for user ${userId}, skipping capsule ${capsule.id}`);
-            resolve();
-            return;
-          }
-          try {
-            const currentPRs = await getPRCount(user.githubToken);
-            if (parseInt(capsule.triggerValue) <= currentPRs) {
-              db.run(
-                'UPDATE capsules SET isDelivered = 1, openedAt = datetime(\'now\') WHERE id = ?',
-                [capsule.id]
-              );
-              deliveredCount++;
-              sendCongratulatoryEmail(req.user.email || userEmail);
->>>>>>> 91a46eab1fd40a13a609998002b36de893f0624b
             }
           );
         });
@@ -890,4 +826,5 @@ exports.checkInLocation = (req, res) => {
     }
   );
 };
+
 
